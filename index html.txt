@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinu Queens | Delicious Handmade Cakes</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dq-pink': '#FFB7B2',
+                        'dq-pink-dark': '#FF9E99',
+                        'dq-gold': '#D4AF37',
+                        'dq-gold-light': '#F3E5AB',
+                        'dq-cream': '#FFF5F5',
+                    },
+                    fontFamily: {
+                        'script': ['"Great Vibes"', 'cursive'],
+                        'body': ['"Nunito"', 'sans-serif'],
+                        'heading': ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for things Tailwind can't do easily */
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%);
+        }
+
+        /* Hover effects for gallery */
+        .cake-card:hover .cake-overlay {
+            opacity: 1;
+        }
+        
+        .cake-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .cake-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Form styling */
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(255, 183, 178, 0.3);
+            border-color: #FFB7B2;
+        }
+
+        /* Navigation transition */
+        header {
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-dq-cream text-gray-700 antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full top-0 z-50 py-6 transition-all duration-300 bg-white/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-3xl md:text-4xl font-script text-dq-pink-dark font-bold hover:text-dq-gold transition-colors">
+                Dinu Queens
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-8 items-center font-semibold text-gray-600">
+                <a href="#home" class="hover:text-dq-pink-dark transition-colors">Home</a>
+                <a href="#about" class="hover:text-dq-pink-dark transition-colors">About</a>
+                <a href="#gallery" class="hover:text-dq-pink-dark transition-colors">Gallery</a>
+                <a href="#menu" class="hover:text-dq-pink-dark transition-colors">Menu</a>
+                <a href="#contact" class="hover:text-dq-pink-dark transition-colors">Contact</a>
+                <a href="#order" class="px-6 py-2 bg-dq-pink text-white rounded-full hover:bg-dq-pink-dark transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    Order Now
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-dq-pink-dark focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute w-full border-t border-gray-100 shadow-lg">
+            <div class="flex flex-col px-6 py-4 space-y-4 font-semibold text-gray-600">
+                <a href="#home" class="hover:text-dq-pink-dark">Home</a>
+                <a href="#about" class="hover:text-dq-pink-dark">About</a>
+                <a href="#gallery" class="hover:text-dq-pink-dark">Gallery</a>
+                <a href="#menu" class="hover:text-dq-pink-dark">Menu</a>
+                <a href="#contact" class="hover:text-dq-pink-dark">Contact</a>
+                <a href="#order" class="text-dq-pink-dark">Order Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 right-0 -z-10 opacity-20 transform translate-x-1/3 -translate-y-1/4">
+            <i class="fas fa-cookie text-9xl text-dq-pink"></i>
+        </div>
+        <div class="absolute bottom-0 left-0 -z-10 opacity-20 transform -translate-x-1/3 translate-y-1/4">
+            <i class="fas fa-birthday-cake text-9xl text-dq-gold"></i>
+        </div>
+
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <!-- Text Content -->
+            <div class="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
+                <span class="text-dq-gold font-bold tracking-widest uppercase text-sm mb-2 block">Est. 2024</span>
+                <h1 class="text-5xl md:text-7xl font-heading font-bold text-gray-800 mb-6 leading-tight">
+                    Welcome to <br>
+                    <span class="text-dq-pink-dark font-script text-6xl md:text-8xl">Dinu Queens</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 font-light italic">
+                    "Delicious Cakes for Every Celebration"
+                </p>
+                <p class="text-gray-500 mb-10 max-w-md mx-auto md:mx-0">
+                    Handcrafted with love, baked to perfection. We turn your sweet dreams into edible reality using only the freshest ingredients.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#order" class="px-8 py-4 bg-dq-pink text-white rounded-full font-bold shadow-lg hover:bg-dq-pink-dark transition-all transform hover:-translate-y-1 text-center">
+                        Order Now
+                    </a>
+                    <a href="#menu" class="px-8 py-4 border-2 border-dq-gold text-dq-gold rounded-full font-bold hover:bg-dq-gold hover:text-white transition-all text-center">
+                        View Menu
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="md:w-1/2 relative">
+                <div class="relative z-10 rounded-full overflow-hidden shadow-2xl border-8 border-white w-80 h-80 md:w-[500px] md:h-[500px] mx-auto">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Beautiful Layered Cake" 
+                         class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <!-- Floating Badge -->
+                <div class="absolute top-10 right-10 md:right-20 bg-white p-4 rounded-2xl shadow-xl z-20 animate-bounce">
+                    <div class="text-center">
+                        <span class="block text-3xl font-bold text-dq-gold">100%</span>
+                        <span class="text-xs font-bold text-gray-500 uppercase">Fresh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1556217477-d325251ece38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="rounded-2xl shadow-lg w-full h-64 object-cover transform translate-y-8">
+                        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="rounded-2xl shadow-lg w-full h-64 object-cover">
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4">Our Sweet Story</h2>
+                    <div class="w-20 h-1 bg-dq-gold mb-6"></div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        At Dinu Queens, we believe that every cake tells a story. Founded with a passion for baking and an eye for elegance, we specialize in creating handmade masterpieces that not only look stunning but taste divine.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        We use only the finest, freshest ingredients—real butter, premium chocolate, and farm-fresh eggs. Whether it's a birthday, wedding, or just a Tuesday that needs brightening, we're here to make your moments memorable.
+                    </p>
+                    
+                    <div class="flex gap-8">
+                        <div class="text-center">
+                            <i class="fas fa-heart text-3xl text-dq-pink mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Made with Love</h4>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-leaf text-3xl text-dq-gold mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Fresh Ingredients</h4>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-truck text-3xl text-dq-pink mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Fast Delivery</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cake Gallery -->
+    <section id="gallery" class="py-20 bg-dq-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-dq-pink-dark font-bold uppercase tracking-wider">Our Creations</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-gray-800 mt-2">Cake Gallery</h2>
+                <div class="w-24 h-1 bg-dq-gold mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Birthday Cakes -->
+                <div class="cake-card group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Birthday Cakes" class="w-full h-full object-cover">
+                    <div class="cake-overlay absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-2xl font-bold font-heading">Birthday Cakes</h3>
+                            <p class="mt-2">Make wishes come true</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wedding Cakes -->
+                <div class="cake-card group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80">
+                    <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding Cakes" class="w-full h-full object-cover">
+                    <div class="cake-overlay absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-2xl font-bold font-heading">Wedding Cakes</h3>
+                            <p class="mt-2">Elegant & Romantic</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chocolate Cakes -->
+                <div class="cake-card group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80">
+                    <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chocolate Cakes" class="w-full h-full object-cover">
+                    <div class="cake-overlay absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-2xl font-bold font-heading">Chocolate Delights</h3>
+                            <p class="mt-2">Rich & Decadent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-dq-gold font-bold uppercase tracking-wider">Tasty Menu</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-gray-800 mt-2">Our Specialties</h2>
+                <div class="w-24 h-1 bg-dq-pink mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Menu Item 1 -->
+                <div class="flex items-center bg-dq-cream p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+                    <div class="ml-6 flex-1">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="text-xl font-bold text-gray-800">Chocolate Cake</h3>
+                            <span class="text-dq-gold font-bold text-lg">$35</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-1">Rich dark chocolate layers with ganache.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="flex items-center bg-dq-cream p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://images.unsplash.com/photo-1519340333755-56e9c1d04579?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+                    <div class="ml-6 flex-1">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="text-xl font-bold text-gray-800">Vanilla Dream</h3>
+                            <span class="text-dq-gold font-bold text-lg">$30</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-1">Classic vanilla bean with buttercream.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="flex items-center bg-dq-cream p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://images.unsplash.com/photo-1586788680434-30d324ba688a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+                    <div class="ml-6 flex-1">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="text-xl font-bold text-gray-800">Red Velvet</h3>
+                            <span class="text-dq-gold font-bold text-lg">$40</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-1">Velvety texture with cream cheese frosting.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="flex items-center bg-dq-cream p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://images.unsplash.com/photo-1626803775151-61d756612fcd?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+                    <div class="ml-6 flex-1">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="text-xl font-bold text-gray-800">Custom Birthday</h3>
+                            <span class="text-dq-gold font-bold text-lg">$50+</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-1">Personalized design for your special day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="order" class="py-20 bg-dq-cream relative">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#FFB7B2 2px, transparent 2px); background-size: 30px 30px;"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+                <div class="bg-dq-pink p-6 text-center">
+                    <h2 class="text-3xl font-heading font-bold text-white">Place Your Order</h2>
+                    <p class="text-white/90 mt-2">Fill out the form below and we'll contact you shortly!</p>
+                </div>
+                
+                <form id="cakeOrderForm" class="p-8 md:p-10 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2" for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="Jane Doe" 
+                                class="input-field w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-dq-pink bg-gray-50">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="nameError">Please enter your name.</p>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2" for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" 
+                                class="input-field w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-dq-pink bg-gray-50">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="phoneError">Please enter a valid phone number.</p>
+                        </div>
+                    </div>
+
+                    <!-- Cake Type -->
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2" for="cakeType">Cake Type</label>
+                        <select id="cakeType" name="cakeType" 
+                            class="input-field w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-dq-pink bg-gray-50">
+                            <option value="" disabled selected>Select a cake...</option>
+                            <option value="chocolate">Chocolate Cake - $35</option>
+                            <option value="vanilla">Vanilla Dream - $30</option>
+                            <option value="redvelvet">Red Velvet - $40</option>
+                            <option value="custom">Custom Birthday Cake - $50+</option>
+                        </select>
+                        <p class="text-red-500 text-xs mt-1 hidden" id="cakeError">Please select a cake type.</p>
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2" for="message">Special Requests</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Allergies, specific design details, delivery date..." 
+                            class="input-field w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-dq-pink bg-gray-50"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-dq-gold text-white font-bold py-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                        <span>Submit Order</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-heading font-bold text-gray-800">Get In Touch</h2>
+                <div class="w-24 h-1 bg-dq-pink mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Phone -->
+                <div class="p-8 bg-dq-cream rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md text-dq-pink text-2xl">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Call Us</h3>
+                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="p-8 bg-dq-cream rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md text-green-500 text-2xl">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">WhatsApp</h3>
+                    <p class="text-gray-600">+1 (555) 987-6543</p>
+                </div>
+
+                <!-- Location -->
+                <div class="p-8 bg-dq-cream rounded-2xl hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md text-dq-gold text-2xl">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Visit Us</h3>
+                    <p class="text-gray-600">123 Sweet Street, Cake City</p>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Follow Our Journey</h3>
+                <div class="flex justify-center gap-6">
+                    <a href="#" class="w-12 h-12 bg-dq-pink text-white rounded-full flex items-center justify-center hover:bg-dq-pink-dark transition-colors transform hover:scale-110">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-dq-pink text-white rounded-full flex items-center justify-center hover:bg-dq-pink-dark transition-colors transform hover:scale-110">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-dq-pink text-white rounded-full flex items-center justify-center hover:bg-dq-pink-dark transition-colors transform hover:scale-110">
+                        <i class="fab fa-pinterest-p text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-script text-dq-pink mb-4">Dinu Queens</h2>
+            <p class="text-gray-400 text-sm mb-4">Baking happiness into every bite.</p>
+            <div class="border-t border-gray-700 pt-4">
+                <p class="text-gray-500 text-sm">&copy; 2024 Dinu Queens Bakery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Navigation Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 3. Form Validation
+            const form = document.getElementById('cakeOrderForm');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+
+                // Name Validation
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (name.value.trim() === '') {
+                    nameError.classList.remove('hidden');
+                    name.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    nameError.classList.add('hidden');
+                    name.classList.remove('border-red-500');
+                }
+
+                // Phone Validation (Simple check for numbers and length)
+                const phone = document.getElementById('phone');
+                const phoneError = document.getElementById('phoneError');
+                const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+                if (!phoneRegex.test(phone.value) || phone.value.length < 10) {
+                    phoneError.classList.remove('hidden');
+                    phone.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    phoneError.classList.add('hidden');
+                    phone.classList.remove('border-red-500');
+                }
+
+                // Cake Type Validation
+                const cakeType = document.getElementById('cakeType');
+                const cakeError = document.getElementById('cakeError');
+                if (cakeType.value === '') {
+                    cakeError.classList.remove('hidden');
+                    cakeType.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    cakeError.classList.add('hidden');
+                    cakeType.classList.remove('border-red-500');
+                }
+
+                // If valid, show success message (simulated)
+                if (isValid) {
+                    alert('Thank you! Your order request has been submitted. We will contact you shortly!');
+                    form.reset();
+                }
+            });
+
+            // Remove error styles on input
+            ['name', 'phone', 'cakeType'].forEach(id => {
+                document.getElementById(id).addEventListener('input', function() {
+                    this.classList.remove('border-red-500');
+                    document.getElementById(id + 'Error').classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
